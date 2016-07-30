@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	Add Actor Form
+	
+	<form id="myForm" action="AddActor" method="POST">
+		First Name<input type="text" name="firstName"/> <br>
+		<br>
+		Last Name<input type="text" name="lastName"/>
+		
+		<input type="checkbox" name="isAlive" value="live" checked="checked"> is Alive
+		
+		<input type="radio" name="gender" value = "male"> Male
+		<input type="radio" name="gender" value = "female"> female
+		
+		<button onclick="validate()">Submit</button>
+	
+	</form>
+	
+	
+	
+	
+	
+	<a href ="index.html"> Back </a>
+	
+	<script type="text/javascript">
+	function validate(){
+		var x = document.forms["myForm"]["firstName"].value;
+	    if (x == null || x == "") {
+	        alert("first Name must be filled out");
+	        return false;
+	    }
+	    var y = document.forms["myForm"]["lastName"].value;
+	    if (y == null || y == "") {
+	        alert("last Name must be filled out");
+	        return false;
+	    }
+	    var z = document.forms["myForm"]["genre"].value;
+	    if (z == null || z == "") {
+	        alert(z);
+	        return false;
+	    }
+	}
+	</script>
+</body>
+</html>

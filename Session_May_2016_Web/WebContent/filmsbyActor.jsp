@@ -1,0 +1,43 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+ <%@ page import="java.util.*" %>   
+<%@page import="com.java.may.domain.Film" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+  <%
+ List<Film> films = (ArrayList)request.getAttribute("films");
+ out.print("Film Count "+films.size());
+ 
+ %>
+ 	<table style="width: 100%" id="table1">
+		<tr>
+			<td><b>Film Id </b></td>
+			<td>Film Name</td>
+			</tr>
+		<%
+			for (int i = 0; i < films.size(); i++) {
+				Film film = (Film) films.get(i);
+		%>
+		<tr>
+			<td><%=film.getFilmId()%></td>
+			<td><%=film.getTitle()%></td>
+		</tr>
+		<%
+			}
+		%>
+
+
+
+	</table>
+
+
+
+</body>
+</html>
+</body>
+</html>

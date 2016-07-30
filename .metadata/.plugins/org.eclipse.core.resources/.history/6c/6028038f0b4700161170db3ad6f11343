@@ -1,0 +1,152 @@
+package com.java.may.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import com.java.may.db.connection.DBConnection;
+import com.java.may.domain.Actor;
+
+public class ActorDAO {
+	
+	public ArrayList getActors() {
+		DBConnection dbConnection = new DBConnection();
+		ArrayList actorList = new ArrayList();
+		try {
+			Connection con = dbConnection.getConnection();
+			PreparedStatement ps = con.prepareStatement("select last_name,first_name from actor "); 
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				Actor actor = new Actor();
+				actor.setFirstName(rs.getString("first_name"));
+				actor.setLastName(rs.getString("last_name"));
+				actorList.add(actor);
+			}
+			
+			rs.close();
+			ps.close();
+			con.close();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return actorList;
+
+	}
+	
+	public Actor getActorbyId(int id) {
+		DBConnection dbConnection = new DBConnection();
+		Actor actor = null;
+		try {
+			Connection con = dbConnection.getConnection();
+			String query = "select * from actor where actor_id = ?"; // parameterized query
+			System.out.println(query);
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				actor = new Actor();
+				actor.setFirstName(rs.getString("first_name"));
+				actor.setLastName(rs.getString("last_name"));
+			}
+			
+			rs.close();
+			ps.close();
+			con.close();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return actor;
+
+	}
+	
+	public ArrayList getActorbyName(String firstName, String lastName) {
+		DBConnection dbConnection = new DBConnection();
+		ArrayList actorList = new ArrayList();
+		try {
+			Connection con = dbConnection.getConnection();
+			String query = "select * from actor where first_name = ? and last_name = ?"; // parameterized query
+			System.out.println(query);
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, firstName);
+			ps.setString(2, lastName);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				Actor actor = new Actor();
+				actor.setFirstName(rs.getString("first_name"));
+				actor.setLastName(rs.getString("last_name"));
+				actorList.add(actor);
+			}
+			
+			rs.close();
+			ps.close();
+			con.close();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return actorList;
+
+	}
+	
+	public int addActor(Actor actor) {
+		DBConnection dbConnection = new DBConnection();
+		int rowsInserted = -1;
+		try {
+			Connection con = dbConnection.getConnection();
+			String query = "insert into actor (first_name,last_name) values(?,?)"; // parameterized query
+			System.out.println(query);
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(1, actor.getFirstName());
+			ps.setString(2, actor.getLastName());
+			rowsInserted = ps.executeUpdate();
+						
+			ps.close();
+			con.close();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return rowsInserted;
+
+	}
+	public int updateActor(Actor actor) {
+		DBConnection dbConnection = new DBConnection();
+		int rowsInserted = -1;
+		try {
+			Connection con = dbConnection.getConnection();
+			String query = "update actor set last_name = ? where first_name = ?"; // parameterized query
+			System.out.println(query);
+			PreparedStatement ps = con.prepareStatement(query);
+			ps.setString(2, actor.getFirstName());
+			ps.setString(1, actor.getLastName());
+			rowsInserted = ps.executeUpdate();
+						
+			ps.close();
+			con.close();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return rowsInserted;
+
+	}
+
+
+	public static void main(String args[])throws SQLException{
+		ActorDAO actorDAO = new ActorDAO();
+		//ArrayList actorList = actorDAO.getActorbyId(70);
+		//Actor actor = (Actor)actorList.get(0);
+		Actor actor = new Actor();
+		actor.setFirstName("James");
+		actor.setLastName("Wu");
+		actorDAO.addActor(actor);
+		actorDAO.updateActor(actor);
+		
+		System.out.print(actor.getFirstName());
+		
+	}
+}

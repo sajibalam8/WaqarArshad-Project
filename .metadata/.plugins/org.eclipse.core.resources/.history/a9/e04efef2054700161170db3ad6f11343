@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<style>
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+</style>
+<body>
+	<h1 align="right">My First Heading</h1>
+	<p>My first paragraph.</p>
+	<div id = "table1">
+	Table 1 
+	<table style="width: 100%" id="table1">
+		<tr>
+			<td><b>Jill</b></td>
+			<td>Smith</td>
+			<td>50</td>
+		</tr>
+		<tr>
+			<td>Eve</td>
+			<td>Jackson</td>
+			<td>94</td>
+		</tr>
+		<tr>
+			<td>Eve</td>
+			<td>Jackson</td>
+			<td>94</td>
+		</tr>
+		<tr>
+			<td>Waqar</td>
+			<td>Arshad</td>
+			<td>94</td>
+		</tr>
+		<tr>
+			<td>Eve</td>
+			<td>Jackson</td>
+			<td>94</td>
+		</tr>
+	</table>
+	</div>
+	<br>
+	<br>
+	<div id="table2">
+	Table 2
+		<table style="width: 100%;">
+			<tr>
+				<td><b>Jill</b></td>
+				<td>Smith</td>
+				<td>50</td>
+			</tr>
+			<tr>
+				<td>Eve</td>
+				<td>Jackson</td>
+				<td>94</td>
+			</tr>
+			<tr>
+				<td>Eve</td>
+				<td>Jackson</td>
+				<td>94</td>
+			</tr>
+			<tr>
+				<td>Waqar</td>
+				<td>Arshad</td>
+				<td>94</td>
+			</tr>
+			
+		</table>
+	</div>
+	<a href="#" onclick="clickme();">Show table</a>
+	<a href="add_actor.html">Add Actor</a>
+	<a href="#">Get All Actor</a>
+	<script>
+		function clickme() {
+			if (document.getElementById("table2").style.display == "table") {
+				document.getElementById("table2").style.display = "none";
+				document.getElementById("table1").style.display = "table";
+
+			} else {
+				document.getElementById("table2").style.display = "table";
+				document.getElementById("table1").style.display = "none";
+
+
+			}
+		}
+	</script>
+
+</body>
+</html>
